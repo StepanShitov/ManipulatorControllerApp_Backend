@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+    <!-- <link href="styleSheet.css" rel="stylesheet" > -->
+    <style>
+        .login {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            z-index: 15;
+            top: 50%;
+            left: 50%;
+            margin: -200px 0 0 -300px;
+            background: tomato;
+            border-radius: 25px;
+        }
+        
+        #btnCenter {
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="background:wheat">
 
-<h1>My First Heading</h1>
-
-<p>My first paragraph.</p>
+    <div class="login">
+        <div class="login" style="width: 580px; height: 380px; margin: -190px 0 0 -290px;">
+            <p style="margin-top: 80px;">
+                <p><b><h3>Ваш логин:</h3></b></p>
+                <input type="text" size="70">
+            </p>
+            <p>
+                <p><b><h3>Ваш пароль:</h3></b></p>
+                <input type="password" size="70">
+            </p>
+            <p>
+                <input type="submit" value="Войти" style="height: 50px; width: 200px; left: 50%; margin-left: 190px;">
+            </p>
+        </div>
+    </div>
 
 </body>
 </html>
