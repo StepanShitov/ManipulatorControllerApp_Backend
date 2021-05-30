@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, minimum-scale=0.1">
     <style>
         .div {
-            
+            margin: 10px 10px;
+            background-color: tomato;
+            text-align: center;
+            border-radius: 25px;
         }
     </style>
 </head>
 <body style="background-color: wheat;">
-    <div style=" height: 10vw; width: 30%; margin: 10px 10px; background-color:tomato; text-align: center;">
+    <div class="div" style=" height: 10vw; width: 30%;">
         <p><b><h3>Hello, {{ username }} </h3></b></p>
     </div>
-    <div style="height: 40vw; width: 30%; margin: 10px 10px; background-color:tomato; text-align: center;">
+    <div class="div" style="height: 40vw; width: 30%;">
         123
+    </div>
+    <div class="div" style="text-align: unset; position: absolute; left: 30%; top: 0; margin-left: 20px; margin-top: 19px; height: 50.5vw; width: 68vw;">
+        <img src="http://127.0.0.1:8000/manipulator/monitor/" style="margin-top: 30px; margin-left: 30px; width: 400px; height: 300px; height: 47.5vw; width: 65vw;">
     </div>
 </body>
 </html>

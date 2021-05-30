@@ -1,6 +1,7 @@
 from manipulator.models import User
 from django.shortcuts import render, resolve_url
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
+from manipulator.camera import VideoCamera, gen
 
 
 def index(request):
@@ -13,3 +14,4 @@ def login(request):
 
 def main_menu(request, username):
     return render(request, 'manipulator/main_menu.html', {'username' : username})
+
