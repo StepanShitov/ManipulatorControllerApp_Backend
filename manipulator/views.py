@@ -17,17 +17,17 @@ def login(request):
 
 def main_menu(request, username):
     if(request.POST.get('forward')):
-        print("1")
+        sendData("1")
     if(request.POST.get('left')):
-        print("2")
+        sendData("2")
     if(request.POST.get('take')):
-        print("3")
+        sendData("1")
     if(request.POST.get('right')):
-        print("4")
+        sendData("2")
     if(request.POST.get('back')):
-        print("5")
+        sendData("1")
     if(request.POST.get('mcrprBtn')):
-        print("6")
+        sendData("2")
     return render(request, 'manipulator/main_menu.html', {'username' : username})
 
 def checkIfUserExists(login, password):

@@ -24,7 +24,7 @@
     <div class="login">
         <div class="login" style="width: 580px; height: 380px; margin: -190px 0 0 -290px;">
             <form action="{% url 'LoginAndPasswordCheck' %}" method="post">
-            {% csrf_token %}
+                {% csrf_token %}
                 <p style="margin-top: 80px;">
                     <p><b><h3>Ваш логин:</h3></b></p>
                     <input type="text" name="UserLoginInput" size="70">

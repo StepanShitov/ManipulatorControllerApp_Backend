@@ -1,6 +1,29 @@
 import serial
+import time
 
-ser = serial.Serial('/dev/ttyS0')  # open serial port
-print(ser.name)         # check which port was really used
-ser.write(b'hello')     # write a string
-ser.close()       
+def sendData(element):
+    print(element)
+    serialcomm = serial.Serial('/dev/ttyACM0', 9600)
+
+    serialcomm.timeout = 1
+
+    while True:
+
+        i = element.strip()
+
+        if i == "Done":
+
+            print('finished')
+
+            break
+
+        serialcomm.write(i.encode())
+
+        time.sleep(0.5)
+
+        a = serialcomm.readline().decode('ascii')
+        if len(a) > 0:
+            break;
+
+    serialcomm.close()
+
