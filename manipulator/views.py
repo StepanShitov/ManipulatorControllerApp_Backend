@@ -16,11 +16,21 @@ def login(request):
 def main_menu(request, username):
     return render(request, 'manipulator/main_menu.html', {'username' : username})
 
+def checkIfUserExists(login, password):
+    usersQuery = User.objects.all()
+    for i in usersQuery:
+        if i.username == login and i.userPassword == password:
+            return True
+    return False        
+
 def enter(request):
     if request.method == "POST":
         login = request.POST.get("UserLoginInput", None)
         password = request.POST.get("UserPasswordInput", None)
         if len(login) == 0 or len(password) == 0:
             return render(request, 'manipulator/authorisation.html', {
-            'error_message': "Please check entered data!" })
+            'error_message': "Неверный логин или пароль!" })
+        if checkIfUserExists(login, password) == False:
+            return render(request, 'manipulator/authorisation.html', {
+            'error_message': "Пользователь не существует!" })
     return redirect(reverse('main_menu', args=(login, )))
