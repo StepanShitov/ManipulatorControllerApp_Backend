@@ -102,13 +102,26 @@
                 <h3>Ручное управление</h3>
                 <p>В данной вкладке с помощью кнопок есть возможность управлять манипулятором</p>
                 <div style="position: inherit; top: 20%; left: 25%; background-color: black; height: 200px; width: 230px;">
-                    <input type="button" value="ВПЕРЕД" class="btn" style="margin-top: 20px;margin-left: 0px;">
-                    <div style="margin-top: 5px;">
-                        <input type="button" value="ВЛЕВО" class="btn" style="margin-left: 0px;">
-                        <input type="button" value="ЗАХВАТ" class="btn">
-                        <input type="button" value="ВПРАВО" class="btn">
+                    <div>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" name="forward" value="ВПЕРЕД" class="btn" style="margin-top: 20px;margin-left: 0px;">
+                        </form>
                     </div>
-                    <input type="button" value="НАЗАД" class="btn" style="margin-top: 5px;">
+                    <div style="margin-top: 5px; margin-left: 5px; display: table;">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" name="left" value="ВЛЕВО" class="btn">
+                            <input type="submit" name="take" value="ЗАХВАТ" class="btn">
+                            <input type="submit" name="right" value="ВПРАВО" class="btn">
+                        </form>
+                    </div>
+                    <div>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" name="back" value="НАЗАД" class="btn" style="margin-top: 5px;">
+                        </form>
+                    </div>
                 </div>
             </div>
           
@@ -118,8 +131,8 @@
                 <div>
                     <input type="text" id="cmndList" style="width: 80%; height: 100px;" readonly="readonly">
                 </div>
-                <div style="margin-top: 30px;">
-                    <input type="button" value="ВПЕРЕД" class="mcrprBtn" onclick="addcmnd(event, 'ВПЕРЕД')">
+                <div style="margin-top: 30px;">                    
+                        <input type="submit" name="forward" value="ВПЕРЕД" class="mcrprBtn" onclick="addcmnd(event, 'ВПЕРЕД')">
                     <input type="button" value="ВЛЕВО" class="mcrprBtn" onclick="addcmnd(event, 'ВЛЕВО')">
                     <input type="button" value="ЗАХВАТ" class="mcrprBtn" onclick="addcmnd(event, 'ЗАХВАТ')">
                     <input type="button" value="ВПРАВО" class="mcrprBtn" onclick="addcmnd(event, 'ВПРАВО')">
@@ -128,7 +141,10 @@
                 <div>
                     <input type="button" value="ОЧИСТИТЬ" class="mcrprBtn" style="width: 100px; margin-top: 30px;" onclick="clearField(event)">
                 </div>
-                <input type="button" value="ОТПРАВИТЬ НА ВЫПОЛНЕНИЕ" class="mcrprBtn" style="height: 100px; width: 220px; margin-top: 30px;">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="ОТПРАВИТЬ НА ВЫПОЛНЕНИЕ" name="mcrprBtn" class="mcrprBtn" style="height: 100px; width: 220px; margin-top: 30px;">
+                </form>
             </div>
     </div>
     <div class="div" style="text-align: unset; position: absolute; left: 30%; top: 0; margin-left: 20px; margin-top: 19px; height: 50.5vw; width: 68vw;">
