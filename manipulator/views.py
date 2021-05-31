@@ -1,6 +1,7 @@
 from manipulator.models import User
-from django.shortcuts import render, resolve_url
-from django.http import HttpResponse, StreamingHttpResponse
+from django.shortcuts import redirect, render, resolve_url
+from django.http import HttpResponse, StreamingHttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from manipulator.camera import VideoCamera, gen
 
 
@@ -15,3 +16,11 @@ def login(request):
 def main_menu(request, username):
     return render(request, 'manipulator/main_menu.html', {'username' : username})
 
+def enter(request):
+    if request.method == "POST":
+        login = request.POST.get("UserLoginInput", None)
+        password = request.POST.get("UserPasswordInput", None)
+        if len(login) == 0 or len(password) == 0:
+            return render(request, 'manipulator/authorisation.html', {
+            'error_message': "Please check entered data!" })
+    return redirect(reverse('main_menu', args=(login, )))
