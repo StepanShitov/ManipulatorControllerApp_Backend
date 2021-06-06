@@ -17,17 +17,23 @@ def login(request):
 
 def main_menu(request, username):
     if(request.POST.get('forward')):
+        print("button forward is pressed")
         sendData("1")
     if(request.POST.get('left')):
+        print("button left is pressed")
         sendData("2")
     if(request.POST.get('take')):
-        sendData("1")
+        print("button take is pressed")
+        sendData("3")
     if(request.POST.get('right')):
+        print("button right is pressed")
         sendData("2")
     if(request.POST.get('back')):
+        print("button back is pressed")
         sendData("1")
     if(request.POST.get('mcrprBtn')):
-        sendData("2")
+        print("button microcomand perform is pressed")
+        sendData("3")
     return render(request, 'manipulator/main_menu.html', {'username' : username})
 
 def checkIfUserExists(login, password):
@@ -49,6 +55,6 @@ def enter(request):
             'error_message': "Пользователь не существует!" })
     return redirect(reverse('main_menu', args=(login, )))
 
-def request_page(request):
-    if(request.POST.get('mybtn')):
-        print("1")
+# def request_page(request):
+#     if(request.POST.get('mybtn')):
+#         print("1")

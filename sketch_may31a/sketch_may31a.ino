@@ -4,7 +4,9 @@ void setup() {
 
   Serial.begin(9600);
 
-  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
 
 }
 void loop() {
@@ -14,17 +16,23 @@ void loop() {
   incomingByte = Serial.readStringUntil('\n');
 
     if (incomingByte == "1") {
-      analogWrite(3, 50);
-      Serial.write("music");      
-      delay(2000);
-      analogWrite(3, 0);
+      digitalWrite(12, HIGH);
+      Serial.write("led");
+      delay(5000);
+      digitalWrite(12, LOW);
     }
 
     else if (incomingByte == "2") {
-      digitalWrite(13, HIGH);
+      digitalWrite(8, HIGH);
       Serial.write("led");
-      delay(2000);
-      digitalWrite(13, LOW);
+      delay(5000);
+      digitalWrite(8, LOW);
+    }
+    else if (incomingByte == "3") {
+      digitalWrite(7, HIGH);
+      Serial.write("led");
+      delay(5000);
+      digitalWrite(7, LOW);
     }
     else{
 

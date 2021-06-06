@@ -11,12 +11,6 @@ def sendData(element):
 
         i = element.strip()
 
-        if i == "Done":
-
-            print('finished')
-
-            break
-
         serialcomm.write(i.encode())
 
         time.sleep(0.5)
