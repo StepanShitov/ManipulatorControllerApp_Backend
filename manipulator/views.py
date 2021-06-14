@@ -42,7 +42,6 @@ def move(request):
     username = request.POST['username'].replace('Hello, ', '')
     if request.POST['activity'] == "mcrPr":
         userActivity = request.POST['activity'] + " ---" + request.POST['commands']
-        print(userActivity)
     else: 
         userActivity = request.POST['activity']
     dateAndTime = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
