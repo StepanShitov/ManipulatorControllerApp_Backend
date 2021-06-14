@@ -54,6 +54,70 @@
             width: 70px;
         }
     </style>
+    <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).on('submit','#moveForward',function(e) {   
+            e.preventDefault();                
+            $.ajax({
+                type:'POST',
+                url:'/manipulator/Stevie/main_menu/move/',
+                data:{
+                    username:$('#usernameSource').html(),
+                    activity:"forward",
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                }
+            });
+        });
+
+        $(document).on('submit','#moveLeftRightTake',function(e) {   
+            e.preventDefault();                
+            $.ajax({
+                type:'POST',
+                url:'/manipulator/Stevie/main_menu/move/',
+                data:{
+                    username:$('#usernameSource').html(),
+                    activity:"leftRight",
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                }
+            });
+        });
+
+        $(document).on('submit','#moveBack',function(e) {   
+            e.preventDefault();                
+            $.ajax({
+                type:'POST',
+                url:'/manipulator/Stevie/main_menu/move/',
+                data:{
+                    username:$('#usernameSource').html(),
+                    activity:"back",
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                }
+            });
+        });
+
+        $(document).on('submit','#processMcrpr',function(e) {   
+            e.preventDefault();                
+            $.ajax({
+                type:'POST',
+                url:'/manipulator/Stevie/main_menu/move/',
+                data:{
+                    username:$('#usernameSource').html(),
+                    activity:"mcrPr",
+                    commands:$('#cmndList').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                }
+            });
+        });
+
+    </script>
     <script>
         function openCity(evt, cityName) {
 
@@ -90,7 +154,7 @@
 </head>
 <body style="background-color: wheat;">
     <div class="div" style=" height: 10vw; width: 30%;">
-        <p><b><h3>Hello, {{ username }} </h3></b></p>
+        <p"><b><h3 id="usernameSource">Hello, {{ username }} </h3></b></p>
     </div>
     <div class="div" style="height: 40vw; width: 30%;">
             <div class="tab" style="position: relative; top: 30px;">
@@ -103,22 +167,19 @@
                 <p>В данной вкладке с помощью кнопок есть возможность управлять манипулятором</p>
                 <div style="position: inherit; top: 20%; left: 25%; background-color: black; height: 200px; width: 230px;">
                     <div>
-                        <form action="" method="POST">
-                            {% csrf_token %}
-                            <input type="submit" name="forward" value="ВПЕРЕД" class="btn" style="margin-top: 20px;margin-left: 0px;">
+                        <form id="moveForward">{% csrf_token %}
+                            <input type="submit" id="forwardBtn" name="forward" value="ВПЕРЕД" class="btn" style="margin-top: 20px;margin-left: 0px;">
                         </form>
                     </div>
                     <div style="margin-top: 5px; margin-left: 5px; display: table;">
-                        <form action="" method="POST">
-                            {% csrf_token %}
+                        <form id="moveLeftRightTake">{% csrf_token %}
                             <input type="submit" name="left" value="ВЛЕВО" class="btn">
                             <input type="submit" name="take" value="ЗАХВАТ" class="btn">
                             <input type="submit" name="right" value="ВПРАВО" class="btn">
                         </form>
                     </div>
                     <div>
-                        <form action="" method="POST">
-                            {% csrf_token %}
+                        <form id="moveBack">{% csrf_token %}
                             <input type="submit" name="back" value="НАЗАД" class="btn" style="margin-top: 5px;">
                         </form>
                     </div>
@@ -141,8 +202,7 @@
                 <div>
                     <input type="button" value="ОЧИСТИТЬ" class="mcrprBtn" style="width: 100px; margin-top: 30px;" onclick="clearField(event)">
                 </div>
-                <form action="" method="POST">
-                    {% csrf_token %}
+                <form id="processMcrpr">{% csrf_token %}
                     <input type="submit" value="ОТПРАВИТЬ НА ВЫПОЛНЕНИЕ" name="mcrprBtn" class="mcrprBtn" style="height: 100px; width: 220px; margin-top: 30px;">
                 </form>
             </div>

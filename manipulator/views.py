@@ -1,7 +1,8 @@
-from manipulator.models import User
+from manipulator.models import User, Logs
 from django.shortcuts import redirect, render, resolve_url
 from django.http import HttpResponse, StreamingHttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from datetime import datetime
 from manipulator.camera import VideoCamera, gen
 from manipulator.sendToArduino import *
 
@@ -16,24 +17,6 @@ def login(request):
 
 
 def main_menu(request, username):
-    if(request.POST.get('forward')):
-        print("button forward is pressed")
-        sendData("1")
-    if(request.POST.get('left')):
-        print("button left is pressed")
-        sendData("2")
-    if(request.POST.get('take')):
-        print("button take is pressed")
-        sendData("3")
-    if(request.POST.get('right')):
-        print("button right is pressed")
-        sendData("2")
-    if(request.POST.get('back')):
-        print("button back is pressed")
-        sendData("1")
-    if(request.POST.get('mcrprBtn')):
-        print("button microcomand perform is pressed")
-        sendData("3")
     return render(request, 'manipulator/main_menu.html', {'username' : username})
 
 def checkIfUserExists(login, password):
@@ -55,6 +38,27 @@ def enter(request):
             'error_message': "Пользователь не существует!" })
     return redirect(reverse('main_menu', args=(login, )))
 
-# def request_page(request):
-#     if(request.POST.get('mybtn')):
-#         print("1")
+def move(request):
+    username = request.POST['username'].replace('Hello, ', '')
+    if request.POST['activity'] == "mcrPr":
+        userActivity = request.POST['activity'] + " ---" + request.POST['commands']
+        print(userActivity)
+    else: 
+        userActivity = request.POST['activity']
+    dateAndTime = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    newUserLog = Logs(actionDate=dateAndTime,userName=username,actionContains=userActivity)
+    newUserLog.save()
+
+    if request.POST['activity'] == "forward":
+        print("button forward is pressed")
+        sendData("1")
+    elif request.POST['activity'] == "leftRight":
+        print("button leftRightTake is pressed")
+        sendData("2")
+    elif request.POST['activity'] == "back":
+        print("button back is pressed")
+        sendData("3")
+    elif request.POST['activity'] == "mcrPr":
+        print("button microcomand perform is pressed")
+        sendData("3")
+    return HttpResponse('')
